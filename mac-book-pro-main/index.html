@@ -16,7 +16,7 @@
             <div class="container">
                 <div class="row ">
                   <div class="col">
-                    <img class="img-fluid" src="mac.png" alt="">
+                    <img class="img-fluid" src="images/mac.png" alt="">
                   </div>
                   <div class="col">
                     <h1>Customize your Blue 24-inch iMac with Apple M1 chip. </h1>
@@ -24,15 +24,15 @@
 
                     <!-- Options -->
                     <h3 class="mt-5">Memory</h3>
-                    <button type="button" class="btn btn-outline-dark">8GB unified memory</button>
-                    <button type="button" class="btn btn-outline-dark">16GB unified memory</button>
+                    <button id="memory-8gb" type="button" class="btn btn-outline-dark">8GB unified memory</button>
+                    <button id="memory-16gb" type="button" class="btn btn-outline-dark">16GB unified memory</button>
                     <h3 class="mt-5">Storage</h3>
-                    <button type="button" class="btn btn-outline-dark">256GB SSD storage</button>
-                    <button type="button" class="btn btn-outline-dark">512GB SSD storage</button>
-                    <button type="button" class="btn btn-outline-dark">1TB SSD storage</button>
+                    <button id="ssd-storage-256gb" type="button" class="btn btn-outline-dark">256GB SSD storage</button>
+                    <button id="ssd-storage-512gb" type="button" class="btn btn-outline-dark">512GB SSD storage</button>
+                    <button id="ssd-storage-1tb" type="button" class="btn btn-outline-dark">1TB SSD storage</button>
                     <h3 class="mt-5">Choose your delivery option</h3>
-                    <button type="button" class="btn btn-outline-dark">Friday, Aug 25 FREE Prime Delivery</button>
-                    <button type="button" class="btn btn-outline-dark">Friday, Aug 21 Delivery charge $20 </button>
+                    <button id="aug-25" type="button" class="btn btn-outline-dark">Friday, Aug 25 FREE Prime Delivery</button>
+                    <button id="aug-21" type="button" class="btn btn-outline-dark">Friday, Aug 21 Delivery charge $20 </button>
                     
                     <!-- Price Table -->
                     <div class="mt-5 w-50">
@@ -40,24 +40,24 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">Best Price</th>
-                                    <td>$ <span>1299</span></td>
+                                    <td>$ <span id="best-price" >1299</span></td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Extra Memory Cost</th>
-                                    <td>$<span>0</span></td>
+                                    <td>$<span  id="extra-memory-cost" >0</span></td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Extra Storage Cost</th>
-                                    <td>$<span>0</span></td>
+                                    <td>$<span id="extra-storage-cost" >0</span></td>
                                   </tr>
                                   <tr>
                                     <th scope="row">Delivery charge</th>
-                                    <td>$<span>0</span></td>
+                                    <td>$<span id="delivery-charge">0</span></td>
                                   </tr>
                             </tbody>
                             <tfoot>
                                 <th scope="row">Total Price</th>
-                                <td>$ <span>1299</span></td>
+                                <td>$ <spanspan id="total-price">1299</span></td>
                             </tfoot>
                           </table>
                     </div>
@@ -84,5 +84,85 @@
 
     <!-- bootstrap script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script>
+      // extra memory calculation
+      function memoryCost (memory) {
+        const extraMemoryCost = document.getElementById('extra-memory-cost');
+        if (memory == 'memory-8gb') {
+          return extraMemoryCost.innerText = 0;
+        }
+        else {
+          return extraMemoryCost.innerText = 180;
+        }
+      }
+
+      // extra storage calculation
+      function storageCost (storage) {
+        const extraStorageCost = document.getElementById('extra-storage-cost');
+        if (storage == 'ssd-storage-256gb') {
+          return extraStorageCost.innerText = 0;
+        }
+        else if (storage == 'ssd-storag-512gb') {
+          return extraStorageCost.innerText = 100;
+        }
+        else {
+          return extraStorageCost.innerText = 180;
+        }
+      }
+
+      // delivery charge calculation
+  
+      function deliveryChargeCost (delivery) {
+        const deliveryCharge = document.getElementById('delivery-charge');
+        if (delivery == 'aug-25') {
+          return deliveryCharge.innerText = 0;
+        }
+        else {
+          return deliveryCharge.innerText = 20;
+        }
+      }
+
+      // extra memory return
+      document.getElementById('memory-8gb').addEventListener('click', function () {
+        memoryCost('memory-8gb');
+        
+      })
+      document.getElementById('memory-16gb').addEventListener('click', function () {
+        memoryCost('memory-16gb'); 
+      })
+
+      // extra storage calculation
+      document.getElementById('ssd-storage-256gb').addEventListener('click', function () {
+        storageCost('ssd-storage-256gb');
+        
+      })
+      document.getElementById('ssd-storage-512gb').addEventListener('click', function () {
+        storageCost('ssd-storag-512gb'); 
+      })
+      document.getElementById('ssd-storage-1tb').addEventListener('click', function () {
+        storageCost('ssd-storage-1tb'); 
+      })
+
+      
+      // delivery charge return
+      document.getElementById('aug-25').addEventListener('click', function () {
+        deliveryChargeCost('aug-25');
+        
+      })
+      document.getElementById('aug-21').addEventListener('click', function () {
+        deliveryChargeCost('aug-21'); 
+      })
+
+      // total price calculation
+      const bestPrice = document.getElementById('best-price');
+      const bestPriceText = bestPrice.innerText;
+      const bestPriceNumber = parseFloat(bestPriceText);
+      const totalPrice = document.getElementById('total-price');
+      totalPrice.innerText = bestPriceNumber + storageCost (storage);
+      console.log(totalPrice);
+      
+      
+    </script>
 </body>
 </html>
